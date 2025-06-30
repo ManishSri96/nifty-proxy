@@ -16,7 +16,11 @@ def get_nifty_data():
             "Referer": "https://www.nseindia.com/option-chain",
         }
         session.headers.update(headers)
-        session.get("https://www.nseindia.com", timeout=5)
+
+        # Get homepage to set cookies (increase timeout to 10)
+        session.get("https://www.nseindia.com", timeout=10)
+
+        # Get option chain data (timeout also 10)
         response = session.get("https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY", timeout=10)
 
         if response.status_code != 200:
